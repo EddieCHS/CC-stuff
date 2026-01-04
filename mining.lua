@@ -94,7 +94,7 @@ local function moveUP(length)
     end
 end
 
-local function directionalMove(lenght,direction)
+local function directionalMove(length,direction)
     assertDirection(direction)
     for i=1,length,1 do
         digIf() 
