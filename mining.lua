@@ -101,6 +101,27 @@ local function moveTo(target)
     lateralMove(move[2])
 end
 
+local function fuel()
+    assert(loadfile("/rom/programs/turtle/refuel.lua"))("all")
+    if turtle.getFuelLevel() < 1000 then
+        moveTo(HOME)
+        assertDirection((START_DIRECTION+1%)4)
+        print("fuel low")
+        io.read()
+    end
+end
+
+local function inventory()
+    if turtle.getItemCount(16) > 0 then
+        moveTo(HOME)
+        assertDirection((START_DIRECTION+2)%4)
+        for i=2,16,1 do
+            turtle.select(i)
+            turtle.drop()
+        end
+    end
+end
+
 local function dig()
     local pos = {}
     pos[1], pos[2], pos[3] = gps.locate()
@@ -117,33 +138,14 @@ local function dig()
         turtle.placeDown()
     end
 
-    --[[
-    print(x,z)
-    assert(loadfile("moveTo.lua"))(home[1]+x,home[2],home[3]+z)
-    dofile("digDown.lua")
-    turtle.select(1)
-    turtle.placeDown()
-
-    assert(loadfile("/rom/programs/turtle/refuel.lua"))("all")
-    if turtle.getFuelLevel() < 1000 then
-        assert(loadfile("moveTo.lua"))(home[1],home[2],home[3])
-        print("fuel low")
-        io.read()
+    if pos[2] == HOME[2] then
+        inventory()
+        fuel()
     end
-
-    if turtle.getItemCount(16) > 0 then
-        assert(loadfile("moveTo.lua"))(home[1],home[2],home[3])
-        turtle.turnLeft()
-        turtle.turnLeft()
-        dofile("dumpInventory.lua")
-        turtle.turnLeft()
-        turtle.turnLeft()
-    end]]--
 end
 
 facing()
-
-
+START_DIRECTION=DIRECTION
 if DIRECTION==0 then
     X=-1
     Z=-1
