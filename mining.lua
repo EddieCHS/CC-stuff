@@ -1,7 +1,7 @@
 DIRECTION=0
 HOME={-332,16,437}
-Xvar=0
-Zvar=0
+X=0
+Z=0
 
 local function digIf()
     if turtle.detect() then
@@ -109,18 +109,22 @@ facing()
 
 
 if facing==0 then
-
+    X=-1
+    Z=-1
 elseif facing==1 then
-
+    X=1
+    Z=-1
 elseif facing==2 then
-
+    X=1
+    Z=1
 elseif facing==3 then
-
+    X=-1
+    Z=1
 end
 
 x=2
 z=2
-moveTo({x+(HOME[1]),nil,z+(HOME[1])})
+moveTo({x+(HOME[1]*X),nil,z+(HOME[3]*Z)})
 --[[
 i=0
 while true do
