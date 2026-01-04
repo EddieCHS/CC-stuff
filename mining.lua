@@ -122,21 +122,19 @@ elseif facing==3 then
     Z=1
 end
 
-x=2
-z=2
-moveTo({x+(HOME[1]*X),nil,z+(HOME[3]*Z)})
---[[
 i=0
 while true do
     x=0
     z=i
     for x=0,i,1 do
-        moveTo({x+(HOME[1]*),nil,z+(HOME[1]*)})
+        moveTo({(X*x)+HOME[1],nil,(Z*z)+home[3]})
+        turtle.digDown()
     end
     x=i
     z=1
     for z=i-1,0,-1 do
-        move({x,nil,z})
+        moveTo({(X*x)+HOME[1],nil,(Z*z)+home[3]})
+        turtle.digDown()
     end
     i=i+1
-end]]--
+end
