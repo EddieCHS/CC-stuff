@@ -30,7 +30,7 @@ local function facing()
     local startPos = {}
     local endPos = {}
     startPos[1], startPos[2], startPos[3] = gps.locate()
-    turtle.digIf()
+    digIf()
     turtle.forward()
     endPos[1], endPos[2], endPos[3] = gps.locate()
     turtle.back()
