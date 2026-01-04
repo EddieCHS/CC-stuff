@@ -8,6 +8,16 @@ local function digIf()
         turtle.dig()
     end
 end
+local function digUpIf()
+    if turtle.detectUp() then
+        turtle.digUp()
+    end
+end
+local function digDownIf()
+    if turtle.detectDown() then
+        turtle.digDown()
+    end
+end
 
 local function assertDirection(target)
     while target~=DIRECTION do
@@ -55,8 +65,23 @@ end
 local function directionalMove(length,direction)
     assertDirection(direction)
     for i=1,length,1 do
-        digIf() 
+        digIf()
+        digUpIf()
         turtle.forward()
+    end
+end
+
+function lateralMove(length)
+    if length>0 then
+        for i=1,length,1 do
+            digUpIf()
+            turtle.up()
+        end
+    elseif length<0 then
+        for i=1,length*-1,1 do
+            digDownIf()
+            turtle.down()
+        end
     end
 end
 
@@ -72,6 +97,8 @@ local function moveTo(target)
     elseif move[3]<0 then
         directionalMove(move[3]*-1,0)
     end
+
+    lateralMove(target[2])
 end
 
 local function dig(x,z)
@@ -127,14 +154,16 @@ while true do
     x=0
     z=i
     for x=0,i,1 do
-        moveTo({(X*x)+HOME[1],nil,(Z*z)+HOME[3]})
-        turtle.digDown()
+        moveTo({(X*x)+HOME[1],HOME[2],(Z*z)+HOME[3]})
+        moveTo({nil,10,nil})
+        moveTo({nil,16,nil})
     end
     x=i
     z=1
     for z=i-1,0,-1 do
-        moveTo({(X*x)+HOME[1],nil,(Z*z)+HOME[3]})
-        turtle.digDown()
+        moveTo({(X*x)+HOME[1],HOME[2],(Z*z)+HOME[3]})
+        moveTo({nil,10,nil})
+        moveTo({nil,16,nil})
     end
     i=i+1
 end
