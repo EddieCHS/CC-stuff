@@ -64,12 +64,12 @@ local function moveTo(target)
     local move = distance(target)
     if move[1]>0 then
         directionalMove(move[1],1)
-    else
+    elseif move[1]<0 then
         directionalMove(move[1]*-1,3)
     end
     if move[3]>0 then
         directionalMove(move[3],2)
-    else
+    elseif move[3]<0 then
         directionalMove(move[3]*-1,0)
     end
 end
