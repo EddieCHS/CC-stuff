@@ -131,7 +131,7 @@ local function dig()
         lateralMove(-2)
         turtle.select(1)
         turtle.placeUp()
-        moveTo({nil,10,nil})
+        moveTo({nil,-59,nil})
     else
         moveTo({nil,HOME[2],nil})
         turtle.select(1)
