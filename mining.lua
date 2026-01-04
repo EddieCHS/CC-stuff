@@ -105,7 +105,7 @@ local function fuel()
     assert(loadfile("/rom/programs/turtle/refuel.lua"))("all")
     if turtle.getFuelLevel() < 1000 then
         moveTo(HOME)
-        assertDirection((START_DIRECTION+1%)4)
+        assertDirection((START_DIRECTION+1)%4)
         print("fuel low")
         io.read()
     end
