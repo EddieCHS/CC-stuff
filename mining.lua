@@ -107,8 +107,7 @@ local function dig()
     local has_block, data = turtle.inspectDown()
 
     if pos[2] == HOME[2] and data.name ~= "minecraft:cobblestone" then
-        turtle.digDown()
-        turtle.digDown()
+        lateralMove(-2)
         turtle.select(1)
         turtle.placeUp()
         moveTo({nil,10,nil})
@@ -164,13 +163,13 @@ while true do
     x=0
     z=i
     for x=0,i,1 do
-        moveTo({(X*x)+HOME[1],HOME[2],(Z*z)+HOME[3]})
+        moveTo({(X*x)+HOME[1],nil,(Z*z)+HOME[3]})
         dig()
     end
     x=i
     z=1
     for z=i-1,0,-1 do
-        moveTo({(X*x)+HOME[1],HOME[2],(Z*z)+HOME[3]})
+        moveTo({(X*x)+HOME[1],nil,(Z*z)+HOME[3]})
         dig()
     end
     i=i+1
