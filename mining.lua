@@ -108,16 +108,16 @@ end
 facing()
 
 
-if facing==0 then
+if DIRECTION==0 then
     X=-1
     Z=-1
-elseif facing==1 then
+elseif DIRECTION==1 then
     X=1
     Z=-1
-elseif facing==2 then
+elseif DIRECTION==2 then
     X=1
     Z=1
-elseif facing==3 then
+elseif DIRECTION==3 then
     X=-1
     Z=1
 end
