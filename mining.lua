@@ -68,6 +68,7 @@ local function directionalMove(length,direction)
         digIf()
         digUpIf()
         turtle.forward()
+        digUpIf()
     end
 end
 
@@ -109,6 +110,8 @@ local function fuel()
         print("fuel low")
         io.read()
     end
+    turtle.select(1)
+    turtle.placeDown()
 end
 
 local function inventory()
