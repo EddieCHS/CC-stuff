@@ -29,10 +29,10 @@ end
 local function facing()
     local startPos
     local endPos
-    startPos[1], pos[2], pos[3] = gps.locate()
+    startPos[1], startPos[2], startPos[3] = gps.locate()
     turtle.digIf()
     turtle.forward()
-    endPos[1], pos[2], pos[3] = gps.locate()
+    endPos[1], endPos[2], endPos[3] = gps.locate()
     turtle.back()
     
     xDiff=endPos[1]-startPos[1]
