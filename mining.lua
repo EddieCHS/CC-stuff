@@ -98,7 +98,7 @@ local function moveTo(target)
         directionalMove(move[3]*-1,0)
     end
 
-    lateralMove(target[2])
+    lateralMove(move[2])
 end
 
 local function dig()
