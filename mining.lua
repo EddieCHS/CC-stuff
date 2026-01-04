@@ -1,4 +1,7 @@
 DIRECTION=0
+HOME={-332,16,437}
+Xvar=0
+Zvar=0
 
 local function digIf()
     if turtle.detect() then
@@ -65,15 +68,10 @@ local function moveTo(target)
         directionalMove(move[1]*-1,3)
     end
     if move[3]>0 then
-        directionalMove(move[3]*-1,0)
-    else
         directionalMove(move[3],2)
+    else
+        directionalMove(move[3]*-1,0)
     end
-    --[[
-    print("moving: ",move[1]," ",move[2]," ",move[3])
-    moveFB(move[3])
-    moveLR(move[1])
-    moveUP(move[2])]]--
 end
 
 local function dig(x,z)
@@ -108,21 +106,33 @@ local function dig(x,z)
 end
 
 facing()
-print(DIRECTION)
---print("moooving")
-moveTo({-335,16,439})
+
+
+if facing==0 then
+
+elseif facing==1 then
+
+elseif facing==2 then
+
+elseif facing==3 then
+
+end
+
+x=2
+z=2
+moveTo({x+(HOME[1]),nil,z+(HOME[1])})
 --[[
 i=0
 while true do
     x=0
     z=i
     for x=0,i,1 do
-        localMove({x,nil,z})
+        moveTo({x+(HOME[1]*),nil,z+(HOME[1]*)})
     end
     x=i
     z=1
     for z=i-1,0,-1 do
-        localMove({x,nil,z})
+        move({x,nil,z})
     end
     i=i+1
 end]]--
