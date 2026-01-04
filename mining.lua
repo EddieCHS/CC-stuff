@@ -1,7 +1,5 @@
 DIRECTION=1
 
-
-
 local function digIf()
     if turtle.detect() then
         turtle.dig()
@@ -48,7 +46,6 @@ local function facing()
     elseif zDiff == -1 then
         DIRECTION = 1
     end
-    
 end
 
 local function moveFB(length)
@@ -156,6 +153,7 @@ end
 X=0
 Z=0
 facing()
+print(DIRECTION)
 --print("moooving")
 --moveTo({-335,16,439})
 --[[
