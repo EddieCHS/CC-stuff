@@ -7,8 +7,9 @@ local function digIf()
 end
 
 local function assertDirection(target)
-    while not target==DIRECTION do
+    while target~=DIRECTION do
         turtle.turnRight()
+        DIRECTION=(DIRECTION+1)%4
     end
 end
 
@@ -45,52 +46,6 @@ local function facing()
         DIRECTION = 2
     elseif zDiff == -1 then
         DIRECTION = 0
-    end
-end
-
-local function moveFB(length)
-    startDir = DIRECTION
-    if length<0 then
-        turtle.turnLeft()
-        turtle.turnLeft()
-        length=-1*length
-    end
-    print("start move ",length)
-    for i=0,length,1 do
-        digIf()
-        print("moving")
-        turtle.forward()
-    end
-
-    assertDirection(startDir)
-end
-
-local function moveLR(length)
-    if length>0 then
-        turtle.turnLeft()
-        moveFB(length)
-        turtle.turnRight()
-    else
-         turtle.turnRight()
-         moveFB(-1*length)
-         turtle.turnLeft()
-    end
-    
-end
-
-local function moveUP(length)
-    local reverse = false
-    if length>0 then
-        reverse = true
-        length=-1*length
-    end
-
-    for i=1,length,1 do
-        if reverse then
-            turtle.down()
-        else
-            turtle.up()
-        end
     end
 end
 
@@ -152,25 +107,6 @@ local function dig(x,z)
     end]]--
 end
 
-function localMove(target)
-    local pos = {X,nil,Z}
-    local diff = {}
-    for i=1,3,1 do
-        if target[i]==nil then
-            diff[i]=0
-        else
-            diff[i] = target[i] - pos[i]
-        end
-    end
-
-    moveFB(diff[3])
-    moveLR(diff[1])
-    X=target[1]
-    Z=target[3]
-end
-
-X=0
-Z=0
 facing()
 print(DIRECTION)
 --print("moooving")
