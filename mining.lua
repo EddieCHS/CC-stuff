@@ -102,13 +102,28 @@ local function moveTo(target)
     lateralMove(move[2])
 end
 
-local function fuel()
+local function refuel()
+    local suckStatus = true
+    while suckStatus do
+        suckStatus=turtle.suck()
+    end
     assert(loadfile("/rom/programs/turtle/refuel.lua"))("all")
+    for i=2,16,1 do
+        turtle.select(i)
+        turtle.drop()
+    end
+end
+
+local function fuel()
     if turtle.getFuelLevel() < 1000 then
         moveTo(HOME)
         assertDirection((START_DIRECTION+1)%4)
-        print("fuel low")
-        io.read()
+
+        local fuelStatus=0
+        while fuelStatus<80000 do
+            refuel()
+            sleep(10)
+        end
     end
     turtle.select(1)
     turtle.placeDown()
