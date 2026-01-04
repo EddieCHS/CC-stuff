@@ -1,4 +1,4 @@
-DIRECTION=1
+DIRECTION=0
 
 local function digIf()
     if turtle.detect() then
@@ -38,13 +38,13 @@ local function facing()
     xDiff=endPos[1]-startPos[1]
     zDiff=endPos[3]-startPos[3]
     if xDiff == 1 then
-        DIRECTION = 2
-    elseif xDiff == -1 then
-        DIRECTION = 4
-    elseif zDiff == 1 then
-        DIRECTION = 3
-    elseif zDiff == -1 then
         DIRECTION = 1
+    elseif xDiff == -1 then
+        DIRECTION = 3
+    elseif zDiff == 1 then
+        DIRECTION = 2
+    elseif zDiff == -1 then
+        DIRECTION = 0
     end
 end
 
@@ -94,12 +94,31 @@ local function moveUP(length)
     end
 end
 
+local function directionalMove(lenght,direction)
+    assertDirection(direction)
+    for i=1,length,1 do
+        digIf() 
+        turtle.forward()
+    end
+end
+
 local function moveTo(target)
     local move = distance(target)
+    if move[1]>0 then
+        directionalMove(move[1],1)
+    else
+        directionalMove(move[1],3)
+    end
+    if move[3]>0 then
+        directionalMove(move[3],0)
+    else
+        directionalMove(move[3],2)
+    end
+    --[[
     print("moving: ",move[1]," ",move[2]," ",move[3])
     moveFB(move[3])
     moveLR(move[1])
-    moveUP(move[2])
+    moveUP(move[2])]]--
 end
 
 local function dig(x,z)
@@ -155,7 +174,7 @@ Z=0
 facing()
 print(DIRECTION)
 --print("moooving")
---moveTo({-335,16,439})
+moveTo({-335,16,439})
 --[[
 i=0
 while true do
