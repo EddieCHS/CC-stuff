@@ -101,12 +101,22 @@ local function moveTo(target)
     lateralMove(target[2])
 end
 
-local function dig(x,z)
+local function dig()
     local pos = {}
     pos[1], pos[2], pos[3] = gps.locate()
-    print(x,z)
-    moveTo({x-pos[1],nil,z+pos[3]})
-    turtle.digDown()
+    local has_block, data = turtle.inspectDown()
+
+    if pos[2] == HOME[2] and data.name ~= "minecraft:cobblestone" then
+        turtle.digDown()
+        turtle.digDown()
+        turtle.select(1)
+        turtle.placeUp()
+        moveTo({nil,10,nil})
+    else
+        moveTo({nil,HOME[2],nil})
+        turtle.select(1)
+        turtle.placeDown()
+    end
 
     --[[
     print(x,z)
@@ -155,15 +165,13 @@ while true do
     z=i
     for x=0,i,1 do
         moveTo({(X*x)+HOME[1],HOME[2],(Z*z)+HOME[3]})
-        moveTo({nil,10,nil})
-        moveTo({nil,16,nil})
+        dig()
     end
     x=i
     z=1
     for z=i-1,0,-1 do
         moveTo({(X*x)+HOME[1],HOME[2],(Z*z)+HOME[3]})
-        moveTo({nil,10,nil})
-        moveTo({nil,16,nil})
+        dig()
     end
     i=i+1
 end
