@@ -112,7 +112,7 @@ local function fuel()
 end
 
 local function inventory()
-    if turtle.getItemCount(16) > 0 then
+    if turtle.getItemCount(12) > 0 then
         moveTo(HOME)
         assertDirection((START_DIRECTION+2)%4)
         for i=2,16,1 do
