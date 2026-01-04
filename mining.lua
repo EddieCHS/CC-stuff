@@ -107,10 +107,10 @@ local function moveTo(target)
     if move[1]>0 then
         directionalMove(move[1],1)
     else
-        directionalMove(move[1],3)
+        directionalMove(move[1]*-1,3)
     end
     if move[3]>0 then
-        directionalMove(move[3],0)
+        directionalMove(move[3]*-1,0)
     else
         directionalMove(move[3],2)
     end
