@@ -174,7 +174,7 @@ Z=0
 facing()
 print(DIRECTION)
 --print("moooving")
-moveTo({-335,16,439})
+moveTo({-335,16,439})exi
 --[[
 i=0
 while true do
