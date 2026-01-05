@@ -1,7 +1,9 @@
 
 
+
+
 DIRECTION=0
-HOME={0,0,0}
+HOME={-332,16,437}
 X=0
 Z=0
 
@@ -44,14 +46,14 @@ end
 
 local function facing()
     localDirectionOffset=0
-    local blocked=detect()
+    local blocked=turtle.detect()
     for i=1,4,1 do
         if not blocked then
             break
         end
         turtle.turnRight()
         DIRECTION=DIRECTION+1
-        blocked=detect()
+        blocked=turtle.detect()
     end
 
     local startPos = {}
