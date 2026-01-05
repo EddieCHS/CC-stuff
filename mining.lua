@@ -45,8 +45,8 @@ local function distance(target)
 end
 
 local function facing()
-    localDirectionOffset=0
     local blocked=turtle.detect()
+    local i
     for i=1,4,1 do
         if not blocked then
             break
@@ -67,14 +67,16 @@ local function facing()
     xDiff=endPos[1]-startPos[1]
     zDiff=endPos[3]-startPos[3]
     if xDiff == 1 then
-        DIRECTION = (DIRECTION+1)%4
+        DIRECTION = (1-DIRECTION)%4
     elseif xDiff == -1 then
-        DIRECTION = (DIRECTION+3)%4
+        DIRECTION = (3-DIRECTION)%4
     elseif zDiff == 1 then
-        DIRECTION = (DIRECTION+2)%4
+        DIRECTION = (2-DIRECTION)%4
     elseif zDiff == -1 then
-        DIRECTION = (DIRECTION+0)%4
+        DIRECTION = (0-DIRECTION)%4
     end
+    START_DIRECTION=DIRECTION
+    DIRECTION=DIRECTION+i
 end
 
 local function directionalMove(length,direction)
@@ -184,7 +186,6 @@ local function dig()
 end
 
 facing()
-START_DIRECTION=DIRECTION
 if DIRECTION==0 then
     X=-1
     Z=-1
