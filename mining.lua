@@ -49,7 +49,7 @@ local function facing()
         if not blocked then
             break
         end
-        turtle.turnRight
+        turtle.turnRight()
         DIRECTION=DIRECTION+1
         blocked=detect()
     end
