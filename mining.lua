@@ -120,7 +120,7 @@ local function fuel()
         assertDirection((START_DIRECTION+1)%4)
 
         local fuelStatus=0
-        while fuelStatus<80000 do
+        while fuelStatus<20000 do
             refuel()
             sleep(10)
         end
