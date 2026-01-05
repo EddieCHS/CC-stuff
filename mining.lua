@@ -1,5 +1,7 @@
+
+
 DIRECTION=0
-HOME={-332,16,437}
+HOME={0,0,0}
 X=0
 Z=0
 
@@ -41,6 +43,17 @@ local function distance(target)
 end
 
 local function facing()
+    localDirectionOffset=0
+    local blocked=detect()
+    for i=1,4,1 do
+        if not blocked then
+            break
+        end
+        turtle.turnRight
+        DIRECTION=DIRECTION+1
+        blocked=detect()
+    end
+
     local startPos = {}
     local endPos = {}
     startPos[1], startPos[2], startPos[3] = gps.locate()
@@ -52,13 +65,13 @@ local function facing()
     xDiff=endPos[1]-startPos[1]
     zDiff=endPos[3]-startPos[3]
     if xDiff == 1 then
-        DIRECTION = 1
+        DIRECTION = (DIRECTION+1)%4
     elseif xDiff == -1 then
-        DIRECTION = 3
+        DIRECTION = (DIRECTION+3)%4
     elseif zDiff == 1 then
-        DIRECTION = 2
+        DIRECTION = (DIRECTION+2)%4
     elseif zDiff == -1 then
-        DIRECTION = 0
+        DIRECTION = (DIRECTION+0)%4
     end
 end
 
@@ -107,7 +120,12 @@ local function refuel()
     while suckStatus do
         suckStatus=turtle.suck()
     end
-    assert(loadfile("/rom/programs/turtle/refuel.lua"))("all")
+
+    for i=2,16,1 do
+        turtle.select(i)
+        turtle.refuel(getItemCount(i))
+    end
+
     for i=2,16,1 do
         turtle.select(i)
         turtle.drop()
@@ -119,9 +137,10 @@ local function fuel()
         moveTo(HOME)
         assertDirection((START_DIRECTION+1)%4)
 
-        local fuelStatus=0
+        local fuelStatus=turtle.getFuelLevel()
         while fuelStatus<20000 do
             refuel()
+            fuelStatus=turtle.getFuelLevel()
             sleep(10)
         end
     end
@@ -184,13 +203,13 @@ while true do
     z=i
     for x=0,i,1 do
         moveTo({(X*x)+HOME[1],nil,(Z*z)+HOME[3]})
-        dig()
+        --dig()
     end
     x=i
     z=1
     for z=i-1,0,-1 do
         moveTo({(X*x)+HOME[1],nil,(Z*z)+HOME[3]})
-        dig()
+        --dig()
     end
     i=i+1
 end
